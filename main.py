@@ -52,7 +52,7 @@ class ItemHandler(webapp2.RequestHandler):
         user_id = self.request.get('user_id')
         if user_id and user_id != 'Anonymous':
             self.response.write(json.dumps([item.to_dict() for item in
-                                             [res for res in Item.query().filter(Item.click != user_id).fetch(100) if res.create_by != user_id]]))
+                                             [res for res in Item.query().filter(Item.create_by != user_id).fetch() if user_id not in res.click ]]))
         else:
             self.response.write(json.dumps([item.to_dict() for item in Item.query().fetch(100)]))
 
