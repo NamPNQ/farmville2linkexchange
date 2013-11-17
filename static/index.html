@@ -17,7 +17,7 @@
     <script type="text/javascript" src="/_ah/channel/jsapi"></script>
 </head>
 
-<body data-ng-controller="MainController" ng-init="IntentLogin()">
+<body data-ng-controller="MainController">
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
@@ -55,7 +55,7 @@
     </div>
     <div ng-show="!feeding">
         <div class="row">
-            <div class="col-md-2" style="text-align: center" data-ng-repeat="item in my_items| filter: { posted: false }">
+            <div class="col-md-2" style="text-align: center" data-ng-repeat="item in my_items| filter: { posted: 'false' }">
                 <a href="#">
                     <img data-src="holder.js/100x100" alt="{{item.attachment.description}}"
                          title="{{item.attachment.description}}"

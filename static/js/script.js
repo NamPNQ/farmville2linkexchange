@@ -95,7 +95,6 @@ angular.module('NamPNQApp', ['facebook'])
                         $scope.login();
                 });
             };
-
             /**
              * Login
              */
@@ -134,7 +133,7 @@ angular.module('NamPNQApp', ['facebook'])
                         data.forEach(function (item) {
                             item.posted = true;
                         })
-                        $scope.my_items= $scope.my_items.joinWith(data, 'link');
+                        $scope.my_items = $scope.my_items.joinWith(data, 'link');
                     })
             };
             //Feed Item From Facebook
@@ -223,7 +222,7 @@ angular.module('NamPNQApp', ['facebook'])
                         "link": item.action_links[0].href, "user_id": $scope.user.id}
                 )
                     .success(function (data, status, headers, config) {
-                       item.posted=true;
+                        item.posted = true;
                     }).error(function (data, status, headers, config) {
                         //$scope.status = status;
                     });
