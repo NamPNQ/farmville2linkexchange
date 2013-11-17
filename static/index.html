@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html data-ng-app="NamPNQApp">
+
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.core.css"
+          type="text/css"/>
+    <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css"
+          type="text/css"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
+    <script src="js/lib/angular-facebook.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://rawgithub.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://rawgithub.com/moment/moment/develop/min/moment.min.js"></script>
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+</head>
+
+<body data-ng-controller="MainController" ng-init="IntentLogin()">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+            <div class="page-header">
+                <h1>Hello FarmVille2 Link Exchange!
+                    <small><a href="http://google.com/+NamPhamNgocQuang" target="_blank">by NamPNQ</a></small>
+                </h1>
+            </div>
+
+            <div>
+                <div class="alert alert-info" data-ng-show="salutation">Hello, {{user.name}}</div>
+                <div class="alert alert-warning" data-ng-show="byebye">Bye bye :'(</div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-large" data-ng-show="!logged"
+                    data-ng-disabled="!facebookReady"
+                    data-ng-click="IntentLogin()">Login with Facebook
+            </button>
+            <button type="button" class="btn btn-danger btn-large" data-ng-show="logged"
+                    data-ng-disabled="!facebookReady"
+                    data-ng-click="logout()">Logout
+            </button>
+        </div>
+    </div>
+</div>
+<br><br>
+
+<div class="container" data-ng-show="logged"><h1>
+        <small>Your links:</small>
+    <a class="btn btn-primary" ng-click="feedItemFromFacebook()">Refesh</a>
+    </h1>
+    <div id="loading" style="text-align: center" ng-show="feeding">
+        <img src="img/loading.gif"/>
+    </div>
+    <div ng-show="!feeding">
+        <div class="row">
+            <div class="col-md-2" style="text-align: center" data-ng-repeat="item in my_items| filter: { posted: false }">
+                <a href="#">
+                    <img data-src="holder.js/100x100" alt="{{item.attachment.description}}"
+                         title="{{item.attachment.description}}"
+                         src="{{item.attachment.media[0].src}}" style="max-height: 100px; max-width: 100px">
+                </a>
+                <br>
+                <a href="#" class="btn btn-primary" role="button" ng-click="post_to_group(item)">Post</a>
+            </div>
+        </div></div>
+
+
+</div>
+<div class="container">
+    <h1>
+        <small>All links:</small>
+        <a class="btn btn-primary" ng-click="getAllItems()">Refesh</a>
+    </h1>
+    <div class="row">
+        <div class="col-md-2" style="text-align: center;" data-ng-repeat="item in items|orderBy:'create_at':true" ng-show="show" ng-init="show=true">
+            <a href="#" ng-click="click(item);show = !show">
+                <img data-src="holder.js/100x100" alt="{{item.message}}" title="{{item.message}}"
+                     src="{{item.picture}}" style="max-height: 100px; max-width: 100px">
+            </a>
+            <br>
+            <h6>
+                <time class="timeago" datetime="{{item.create_at}}">{{item.time_ago}}</time>
+            </h6>
+            <a href="#" class="btn btn-primary" role="button" ng-click="click(item);show = !show">Click({{item.click.length}})</a>
+        </div>
+    </div>
+</div>
+<!--<div>-->
+<!--<debug val="user"></debug>-->
+<!--</div>-->
+
+
+</body>
+<script>
+</script>
+</html>
